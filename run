@@ -1,0 +1,24 @@
+#! /bin/bash 
+
+python3 scraper.py
+cp data/sk_combined.py api/data.py
+if [ "$1" == "production" ]; then
+./run_production
+elif [[ "$1" == "development" && "$2" == "private" ]]; then
+./run_development localhost
+elif [[ "$1" == "development" && "$2" == "public" ]]; then
+./run_development 0.0.0.0
+else  
+''' 
+    <#> USAGE:                ./run [MODE] [SCOPE]
+    <#> MODES
+    <#> 
+    <#> developement:         runs flask in dev mode, uses test.db database, saccess scope: [SCOPE]
+    <#> production:           runs flask in production mode, uses murdle.db database, accessible publicly
+    <#>
+    <#> SCOPES                (only available in developement mode)
+    <#> 
+    <#> public:               served on host: 0.0.0.0
+    <#> private:              served on host: localhost
+''' 
+fi

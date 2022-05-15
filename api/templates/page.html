@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'styles.css') }}" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+        <script src="{{ url_for('static', filename = 'script.js') }}"></script>
+        
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+
+        {% block script %}{% endblock %}
+    </head>
+    <body>
+        <a href="/"><h1>murdle</h1></a>
+        <div>total visits {{ visits }}</div>
+            {% block body %}{% endblock %}
+        <footer>
+            <div><a href="/contact">email murdle</a></div>
+            <div><a href="https://www.tomorrowtides.com/google361.html">your moms phone number</a></div>
+        </footer>
+    </body>
+</html>

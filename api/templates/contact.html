@@ -1,0 +1,15 @@
+{% extends "page.html" %}
+{% block title %}contact murdle{% endblock %}
+{% block script %}
+<script type = "text/javascript" 
+src = "{{ url_for('static', filename = 'contact.js') }}" ></script>
+{% endblock %}
+{% block body %}
+<form action="/" method="POST">
+    <label for "email">Email</label>
+    <input type="email" id="email" name="email" autocomplete="off" placeholder="Your email here..." required>
+    <label for "msg">Message</label>
+    <textarea  id="msg" name="msg" autocomplete="off" placeholder="Your message here..." cols="30" rows="10"></textarea>
+    <input type="submit" id="submit">
+</form>
+{% endblock %}

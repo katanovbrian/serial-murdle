@@ -6,19 +6,17 @@ from flask import (Flask,
     url_for, 
     send_from_directory)
 import sqlite3
-import os
 import secrets
 import random
 from datetime import date
-
+from multiprocessing import Value
 from data import data
 
-if os.environ.get('murdle-visits') is None:
-    os.environ['murdle-visits'] = '0'
 
 app = Flask (__name__, static_folder='static')
 
 # init
+counter = Value('i', 0)
 START_DATE = date.today()
 MAX_DAYS = len(data)
 random.seed(3708426)
@@ -36,11 +34,13 @@ def index():
     todays_murdle = data[int((date.today()-START_DATE).days)].split()[1]
         
     # Increment visit counter
-    os.environ['murdle-visits'] = str(int(os.environ['murdle-visits']) + 1)
+    with counter.get_lock():
+        counter.value += 1
+        visits = counter.value
     
     resp = make_response(render_template('index.html',
             murdle_length=len(todays_murdle),
-            visits=os.environ['murdle-visits']),200)
+            visits=visits),200)
 
     # set cookie if not exists            
     if not 'visited' in request.cookies:

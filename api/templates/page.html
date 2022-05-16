@@ -3,9 +3,9 @@
     <head>
         <title>{% block title %}{% endblock %}</title>
         <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'styles.css') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/styles.css') }}" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
-        <script src="{{ url_for('static', filename = 'script.js') }}"></script>
+        <script src="{{ url_for('static', filename = 'js/script.js') }}"></script>
         
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,8 +18,7 @@
         <div>total visits {{ visits }}</div>
             {% block body %}{% endblock %}
         <footer>
-            <div><a href="/contact">email murdle</a></div>
-            <div><a href="https://www.tomorrowtides.com/google361.html">your moms phone number</a></div>
+            <a href="/contact">email murdle</a>
         </footer>
     </body>
 </html>

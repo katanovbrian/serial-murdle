@@ -1,7 +1,7 @@
 {% extends "page.html" %}
 {% block title %}murdle{% endblock %}
 {% block script %}
-<script type = "text/javascript" src = "{{ url_for('static', filename = 'murdle.js') }}" ></script>
+<script type = "text/javascript" src = "{{ url_for('static', filename = 'js/murdle.js') }}" ></script>
 {% endblock %}
 {% block body %}
 {% for row in range(6) %}
@@ -11,5 +11,5 @@
 {% endfor %}
 </div>
 {% endfor %}
-<input type="text" id="hidden-input" autofocus/>
+<input type="text" id="hidden-input" maxlength="{{murdle_length}}" autofocus/>
 {% endblock %} 

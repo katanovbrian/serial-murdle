@@ -12,12 +12,15 @@
 ### Work in progress
 ---
 
-- [ ] Enter key functionality
+- [X] Enter key functionality
+  - [ ] AJAX form validation
 - [ ] handle evaluate response client side
-- [ ] figure out environment variable persistence with python
+
 
 
 ### Done
 ---
 
 - [X] figure out localstorage
+- [X] figure out environment variable persistence with python
+  - [X] Implement with multiprocessing

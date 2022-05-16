@@ -1,6 +1,7 @@
 # serial-murlde
-
-## a wordle-like guessing game 
 ---
-generates a daily murdle from wikipedias list of serial killers to be guessed in 6 tries
+
+A true crime themed word guessing game
+
+Guess the name of a serial killer in 6 tries or less
 

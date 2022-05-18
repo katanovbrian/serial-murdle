@@ -1,0 +1,41 @@
+#hidden-input {
+  border : 0;
+  outline : none;
+}
+
+.row {
+  display: block;
+  padding: 1rem;
+  display : flex;
+  flex-direction : row;
+  align-items:right;
+  justify-content: right;
+}
+
+.char-box {
+  background-color: lightgrey;
+  display: inline-block;
+  height: 4em;
+  margin: 0.1em;
+  text-align: center;
+  width: 4em;
+  border-radius: 5px;
+  color:red;
+}
+
+.char-box text {
+  color: black;
+  text-align: center;
+}
+
+.correct-guess-char-box {
+  background-color: green;
+}
+
+.correct-guess-incorrect-placement-char-box {
+  background-color: yellow;
+}
+
+.incorrect-guess-char-box {
+  background-color: darkgrey;
+}

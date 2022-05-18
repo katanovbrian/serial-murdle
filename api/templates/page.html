@@ -14,11 +14,8 @@
         {% block script %}{% endblock %}
     </head>
     <body>
-        <a href="/"><h1>murdle</h1></a>
-        <div>total visits {{ visits }}</div>
-            {% block body %}{% endblock %}
-        <footer>
-            <a href="/contact">email murdle</a>
-        </footer>
+        <header><a href="/"><h1>murdle</h1></a></header>
+        {% block body %}{% endblock %}
+        <footer><a href="/contact">email murdle</a></footer>
     </body>
 </html>

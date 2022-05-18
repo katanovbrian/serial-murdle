@@ -12,10 +12,10 @@ $(document).ready(function () {
             dataType : "json",
             encode : true,
         }).done(function (data) {
+            console.log('resp');
             console.log(data);
+            form.reset();
+            event.preventDefault(); 
         })
-
-        event.preventDefault(); 
-
     })
 })

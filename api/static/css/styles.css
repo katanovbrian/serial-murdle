@@ -5,7 +5,7 @@ body {
   display : flex;
   flex-direction: column;
   align-items: center;
-  color : #97e0fc;
+  color : red;
   opacity: 50%;
   font-family: 'Anton', sans-serif;
   padding-bottom: 2.5rem; 
@@ -13,7 +13,7 @@ body {
 
 a, a:visited {
   text-decoration: none;
-  color : #97e0fc;
+  color : red;
 }
 
 h1 {
@@ -27,53 +27,6 @@ h1 {
   font-size: 2rem;
 }
 
-
-form{
-  display : flex;
-  flex-direction: column;
-  align-items : center;
-  margin-top: 6px; /* Add a top margin */
-  margin-bottom: 16px; /* Bottom margin */
-
-}
-
-form input[type=text], select, textarea {
-  width: 50%; /* Full width */
-  height: 5rem;
-  padding: 12px; /* Some padding */ 
-  border: 1px solid #ccc; /* Gray border */
-  border-radius: 4px; /* Rounded borders */
-  box-sizing: border-box; /* Make sure that padding and width stays in place */
-  margin-top: 6px; /* Add a top margin */
-  margin-bottom: 16px; /* Bottom margin */
-  resize: vertical /* Allow the user to vertically resize the textarea (not horizontally) */
-}
-
-form input[type=email]{
-  width: 40%; /* Full width */
-  padding: 12px; /* Some padding */ 
-  border: 1px solid #ccc; /* Gray border */
-  border-radius: 4px; /* Rounded borders */
-  box-sizing: border-box; /* Make sure that padding and width stays in place */
-  margin-top: 6px; /* Add a top margin */
-  margin-bottom: 16px; /* Bottom margin */
-}
-
-/* Style the submit button with a specific background color etc */
-input[type=submit] {
-  background-color: black;
-  color: white;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-/* When moving the mouse over the submit button, add a darker green color */
-input[type=submit]:hover {
-  background-color: red;
-}
-
 footer {
   height: 25%;
   width: 100%;
@@ -82,50 +35,7 @@ footer {
   align-items: center;
   justify-content: 'center';
   font-size:1.5rem;
-
   position: absolute;
   bottom: 0;
   height: 2.5rem;  
-}
-
-#hidden-input {
-  border : 0;
-  outline : none;
-}
-
-.row {
-  display: block;
-  padding: 1rem;
-  display : flex;
-  flex-direction : row;
-  align-items:right;
-  justify-content: right;
-}
-
-.char-box {
-  background-color: lightgrey;
-  display: inline-block;
-  height: 2em;
-  margin: 0.1em;
-  text-align: center;
-  width: 2em;
-  border-radius: 5px;
-  color:white;
-}
-
-.char-box text {
-  color: black;
-  text-align: center;
-}
-
-.correct-guess-char-box {
-  background-color: green;
-}
-
-.correct-guess-incorrect-placement-char-box {
-  background-color: yellow;
-}
-
-.incorrect-guess-char-box {
-  background-color: darkgrey;
 }

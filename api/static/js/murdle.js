@@ -1,27 +1,34 @@
 const isAlphaNumeric = str => /^[a-z]+$/gi.test(str)
 
+function readFromStorage () {
+    var numGuesses = parseInt(localStorage.getItem('numGuesses'));
+    var guesses = JSON.parse(localStorage.getItem('guesses'));
+    var responses = JSON.parse(localStorage.getItem('responses'));
+    return [numGuesses,guesses,responses];
+}
+
+function writeToStorage (numGuesses,guesses,responses) {
+    localStorage.setItem('numGuesses',numGuesses);
+    localStorage.setItem('guesses',JSON.stringify(guesses));
+    localStorage.setItem('responses',JSON.stringify(responses));
+}
+
 class Murdle {
     
     constructor() {
-        console.log('constructor');
-        this.numGuesses = 0;
-        this.guesses = ["","","","","",""];
-        this.responses = ["","","","","",""];
+        var numGuesses = 0;
+        var guesses = ["","","","","",""];
+        var responses = ["","","","","",""];
         if (!localStorage.getItem('readFromLocal')) { // write to localstorage
-            localStorage.setItem('readFromLocal',true);
-            localStorage.setItem('numGuesses',this.numGuesses);
-            localStorage.setItem('guesses',JSON.stringify(this.guesses));
-            localStorage.setItem('responses',JSON.stringify(this.responses));
+            localStorage.clear();
+            writeToStorage(numGuesses,guesses,responses);                    
         }
-        //read from localstorage
-        this.numGuesses = localStorage.getItem('numGuesses')
-        this.guesses = JSON.parse(localStorage.getItem('guesses'));
-        this.responses = JSON.parse(localStorage.getItem('responses'));
     }
     
     evaluate(guess) {
         if (guess.length != $('.row')[0].children.length) {
             console.log("wrong length");
+            
             return;
         }
         else {
@@ -30,33 +37,50 @@ class Murdle {
                 type : "GET",
                 url : "/evaluate",
                 data : { "guess" : guess},
-            }).done(function (data) {
-                console.log("response");
-                console.log(data['resp']);
-
-                this.numGuesses += 1;
-                this.guesses[this.numGuesses] = guess;
-                this.responses[this.numGuesses] = data;
-
-                console.log(this.guesses);
-                localStorage.setItem('numGuesses',this.numGuesses);
-                localStorage.setItem('guesses',JSON.stringify(this.guesses));
-                localStorage.setItem('responses',JSON.stringify(this.responses));
-
-                $("#hidden-input").val('');
+                success : function (result) {
+                    console.log(result);
+                    console.log(result['resp']);
+                    
+                    var [numGuesses,guesses,responses] = readFromStorage();
+                    guesses[numGuesses] = guess;
+                    responses[numGuesses] = result;
+                    numGuesses += 1;
+                    writeToStorage(numGuesses,guesses,responses);                    
     
+                    $("#hidden-input").val('');
+                },
+                errorr : function (result) {
+                    console.log(result);
+                }
             })
         }
     }
 
     printMurdle(guess){
-        console.log(guess.length)
+        console.log("printMurdle")
+        const [numGuesses,guesses,responses] = readFromStorage();
         const rows = $(".row");
-        for (let i = 0; i <= this.numGuesses; i++){
+        for (let i = 0; i <= numGuesses; i++){
             var currentRow = rows[i].children;
             for (let j = 0; j < currentRow.length; j++){
-                if (i < this.numGuesses) {
-                    currentRow[j].innerHTML = ((this.guesses[i])[j] || '').toUpperCase();
+                if (i < numGuesses) {
+                    console.log(currentRow[j])
+                    currentRow[j].innerHTML = ((guesses[i])[j] || '').toUpperCase();
+                    console.log(responses[i][j])
+                    switch (responses[i][j]) {
+                        case 'G':
+                            console.log(currentRow[j])
+                            currentRow[j].addClass("correct-guess-char-box");
+                            break;
+                        case 'Y':
+                            currentRow[j].addClass("correct-guess-incorrect-placement-char-box");
+                            break;
+                        case 'R':
+                            currentRow[j].addClass("incorrect-guess-char-box");
+                            break;
+                    }
+
+
                 }
                 else {
                     currentRow[j].innerHTML = (guess[j] || '').toUpperCase();
@@ -77,6 +101,7 @@ $(document).ready(function(){
                 vals = input.val().slice(0,-1);
                 break;
             case (event.key == 'Enter'):
+                console.log('Enter')
                 guess=input.val();
                 murdle.evaluate(guess=input.val());
                 break;
